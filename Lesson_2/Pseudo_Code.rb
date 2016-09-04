@@ -25,7 +25,7 @@ START
 
 #Given an array of strings 
 DEF a method 
-  - concatenate those strings 
+  SET strings.flatten 
 
 PRINT the result of the concatenateion 
 
@@ -51,7 +51,10 @@ SET new array = values when iterator at odd numbers
 
 DEF a method
   - iterate through the array 
-  - print out the element of the array only when the iterator equals to odd numbers
+  IF iterator%2 == 0
+     go to the next number
+  ELSE iterator%2 != 0
+     puts this number 
   -put the numbers selected into a new array 
 
 PRINT new array 
