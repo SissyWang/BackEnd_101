@@ -1,17 +1,17 @@
-# ask the users for 2 numbers 
-# ask the user for an operation to perform 
+# ask the users for 2 numbers
+# ask the user for an operation to perform
 # perform the operation on the 2 numbers
-#output the result
+# output the result
 
-#answer=Kernel.gets()
-#Kernel.puts(answer)
+# answer=Kernel.gets()
+# Kernel.puts(answer)
 def prompt(message)
   Kernel.puts("=> #{message}")
-end 
+end
 
 def valid_number?(num)
   num.to_i() != 0
-end 
+end
 
 def operation_to_message(op)
   case op
@@ -23,37 +23,34 @@ def operation_to_message(op)
     'Multiplying'
   when '4'
     'Dividing'
-  end 
-end 
-
+  end
+end
 
 prompt("Welcome to Calculator! Enter your name: ")
 name = ''
 
 loop do
-name = Kernel.gets().chomp()
-
+  name = Kernel.gets().chomp()
+  
   if name.empty?()
-    prompt("Make sure to use a valid name")
+  prompt("Make sure to use a valid name")
   else 
-    break
+  break
   end 
-end 
-
+end
 
 prompt("Hi #{name}!")
-
-loop do #main loop
+loop do # main loop
 number1 = ''
 
 loop do
-prompt("What's the firt number?")
+  prompt("What's the firt number?")
 number1=Kernel.gets().chomp()
 
   if valid_number?(number1)
   break
   else
-  prompt("Hm, that doesnt look like a valid number")
+    prompt("Hm, that doesnt look like a valid number")
   end 
 end
 
@@ -69,7 +66,7 @@ number2=Kernel.gets().chomp()
   end 
 end 
 
-operator_promot = <<-MSG
+operator_prompt = <<-MSG
     What operation would you like to perform?
     1) add
     2) substract
@@ -77,7 +74,7 @@ operator_promot = <<-MSG
     4) divide
   MSG
 
-  prompt(operator_promot)
+  prompt(operator_prompt)
 
 
 operator = ''
