@@ -2,6 +2,8 @@
 # shortern the user input
 # build a score system
 
+require 'pry'
+
 VALID_CHOICES = {
   'r' => 'rock',
   'p' => 'paper',
@@ -10,21 +12,24 @@ VALID_CHOICES = {
   'sp' => 'spock'
 }
 
+WINNING_CONDITION = {
+  'r' => ['sc','l'],
+  'p' => ['r', 'sp'],
+  'sc' => ['p', 'l'],
+  'sp' => ['sc', 'r'],
+  'l' => ['sp', 'p']
+}
+
+def clear_screen
+  system 'clear'
+end
+
 def prompt(message)
   Kernel.puts("=>#{message}")
 end
 
 def win?(first, second)
-  (first == 'r' && second == 'sc') ||
-    (first == 'r' && second == 'l') ||
-    (first == 'p' && second == 'r') ||
-    (first == 'p' && second == 'sp') ||
-    (first == 'sc' && second == 'p') ||
-    (first == 'sc' && second == 'l') ||
-    (first == 'sp' && second == 'sc') ||
-    (first == 'sp' && second == 'r') ||
-    (first == 'l' && second == 'sp') ||
-    (first == 'l' && second == 'p')
+  WINNING_CONDITION[first].include?(second)
 end
 
 def display_result(players, computer)
@@ -41,7 +46,6 @@ loop do
   player_score = 0
   computer_score = 0
   prompt("Get 5 to win the game")
-
   loop do
     choice = ''
     loop do
@@ -49,7 +53,7 @@ loop do
         prompt("#{k} for #{v}")
       end
 
-      choice = gets.chomp
+      choice = gets.chomp.downcase
 
       if VALID_CHOICES.include?(choice)
         break
@@ -57,15 +61,17 @@ loop do
         prompt("That's not a valid choice.")
       end
     end
-
+    #binding.pry
     computer_choice = VALID_CHOICES.keys.sample
 
     prompt("You chose: #{choice}; computer chose #{computer_choice}")
 
     if display_result(choice, computer_choice) == "You won"
       player_score += 1
+      prompt"You win!"
     elsif display_result(choice, computer_choice) == "Computer won"
       computer_score += 1
+      prompt"Computer win!"
     else
       prompt("0 for both side")
     end
@@ -81,12 +87,26 @@ loop do
       break
     else
       prompt("game not end yet")
+      #clear_screen
     end
   end
 
-  prompt("do you want to play again?")
-  answer = gets.chomp
-  break unless answer.downcase.start_with?('y')
+  end_game = false
+
+  loop do
+    prompt("do you want to play again?('y'for yes 'n' for no)")
+    answer = gets.chomp
+      if answer.downcase.start_with?('y')
+        puts "OK let's do it again then"
+        break
+      elsif answer.downcase.start_with?('n')
+        prompt("Thank you for playing")
+        end_game = true
+        break
+      else 
+        puts "it's not a valid answer"
+      end 
+  end 
+break if end_game
 end
 
-prompt("Thank you for playing")
