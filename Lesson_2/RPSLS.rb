@@ -2,8 +2,6 @@
 # shortern the user input
 # build a score system
 
-require 'pry'
-
 VALID_CHOICES = {
   'r' => 'rock',
   'p' => 'paper',
@@ -61,7 +59,7 @@ loop do
         prompt("That's not a valid choice.")
       end
     end
-    #binding.pry
+
     computer_choice = VALID_CHOICES.keys.sample
 
     prompt("You chose: #{choice}; computer chose #{computer_choice}")
