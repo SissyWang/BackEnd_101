@@ -11,11 +11,11 @@ VALID_CHOICES = {
 }
 
 WINNING_CONDITION = {
-  'r' => ['sc','l'],
-  'p' => ['r', 'sp'],
-  'sc' => ['p', 'l'],
-  'sp' => ['sc', 'r'],
-  'l' => ['sp', 'p']
+  'r' => %w(sc l),
+  'p' => %w(r sp),
+  'sc' => %w(p l),
+  'sp' => %w(sc r),
+  'l' => %w(sp p)
 }
 
 def clear_screen
@@ -85,7 +85,9 @@ loop do
       break
     else
       prompt("game not end yet")
-      #clear_screen
+      sleep(4)
+      clear_screen
+
     end
   end
 
@@ -101,10 +103,9 @@ loop do
         prompt("Thank you for playing")
         end_game = true
         break
-      else 
+      else
         puts "it's not a valid answer"
-      end 
-  end 
-break if end_game
+      end
+  end
+  break if end_game
 end
-
