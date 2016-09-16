@@ -20,3 +20,4 @@ method 2: statement.scan('t').count
 
 #6
 title.center(40)
+
