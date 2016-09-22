@@ -1,11 +1,12 @@
-def tricky_method(a_string_param, an_array_param)
-  a_string_param << "rutabaga"
-  an_array_param << "rutabaga"
+
+
+ def dot_separated_ip_address?(input_string)
+  dot_separated_words = input_string.split(".")
+  return false unless input_string.size == 4
+
+  while dot_separated_words.size > 0 do
+    word = dot_separated_words.pop
+    return false unless is_an_ip_number?(word)
+  end
+  true
 end
-
-my_string = "pumpkins"
-my_array = ["pumpkins"]
-tricky_method(my_string, my_array)
-
-puts "My string looks like this now: #{my_string}"
-puts "My array looks like this now: #{my_array}"
